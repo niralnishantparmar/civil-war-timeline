@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The American Civil War: A Timeline 1861-1865</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1008;
+    --paper: #f4e8cf;
+    --paper-2: #ead8b3;
+    --paper-3: #fff9ef;
+    --union: #1b3a6b;
+    --union-2: #2a5298;
+    --confed: #8b1a1a;
+    --gray: #6b6056;
+    --gold: #c8960c;
+    --gold-2: #e8b84b;
+    --shadow: rgba(20, 14, 8, 0.22);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 36px 18px 60px;
+    font-family: 'Libre Baskerville', serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 15% 10%, rgba(75,46,16,0.45), transparent 28%),
+      radial-gradient(circle at 85% 90%, rgba(30,16,8,0.45), transparent 30%),
+      linear-gradient(180deg, #342211 0%, #1d1208 100%);
+  }
+
+  .page {
+    max-width: 1150px;
+    margin: 0 auto;
+    position: relative;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"),
+      linear-gradient(160deg, #f8edd6 0%, #efdfbc 45%, #e7d2aa 100%);
+    box-shadow: 0 24px 90px rgba(0,0,0,0.62), inset 0 0 120px rgba(200,150,60,0.08);
+    overflow: hidden;
+  }
+
+  .page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 140px 100% at 0% 50%, rgba(145,95,38,0.14), transparent 70%),
+      radial-gradient(ellipse 140px 100% at 100% 50%, rgba(145,95,38,0.14), transparent 70%),
+      radial-gradient(ellipse 100% 100px at 50% 0%, rgba(145,95,38,0.1), transparent 70%),
+      radial-gradient(ellipse 100% 100px at 50% 100%, rgba(145,95,38,0.1), transparent 70%);
+    z-index: 1;
+  }
+
+  .outer-border {
+    position: relative;
+    margin: 22px;
+    border: 3px solid var(--union);
+  }
+
+  .inner-border {
+    position: relative;
+    margin: 4px;
+    border: 1px solid var(--gold);
+    padding: 34px 34px 42px;
+  }
+
+  .corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    z-index: 5;
+  }
+
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: -2px; left: -2px; }
+  .corner.tr { top: -2px; right: -2px; transform: scaleX(-1); }
+  .corner.bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+  .corner.br { bottom: -2px; right: -2px; transform: scale(-1, -1); }
+
+  .header {
+    position: relative;
+    text-align: center;
+    border-bottom: 2px solid var(--union);
+    padding-bottom: 24px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    line-height: 0.98;
+    font-size: clamp(38px, 6vw, 72px);
+    color: var(--union);
+    letter-spacing: -1px;
+    text-shadow: 2px 3px 0 rgba(27,58,107,0.13);
+  }
+
+  .title span { color: var(--confed); }
+
+  .subtitle {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--gray);
+    margin-top: 8px;
+  }
+
+  .dates {
+    margin-top: 10px;
+    font-size: 14px;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .rule-line {
+    width: min(180px, 28vw);
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--union), transparent);
+  }
+
+  .rule-mark {
+    color: var(--gold);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .byline {
+    margin-top: 14px;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  .byline strong {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--union);
+    font-style: normal;
+  }
+
+  .legend {
+    margin: 20px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid var(--paper-3);
+  }
+
+  .legend-dot.union { background: var(--union); box-shadow: 0 0 0 1.5px var(--union); }
+  .legend-dot.confed { background: var(--confed); box-shadow: 0 0 0 1.5px var(--confed); }
+
+  .timeline {
+    position: relative;
+    margin-top: 34px;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, var(--union), var(--confed), var(--gray));
+    z-index: 0;
+  }
+
+  .year-marker {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    margin: 26px 0 14px;
+  }
+
+  .year-badge {
+    background: var(--union);
+    color: var(--gold-2);
+    border: 2px solid var(--gold);
+    padding: 7px 22px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 4px;
+    clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0% 50%);
+  }
+
+  .event {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 64px 1fr;
+    align-items: center;
+    margin: 10px 0 20px;
+    z-index: 1;
+  }
+
+  .event.left .card-wrap { grid-column: 1; }
+  .event.left .center { grid-column: 2; }
+  .event.right .card-wrap { grid-column: 3; }
+  .event.right .center { grid-column: 2; }
+
+  .card-wrap {
+    width: 100%;
+  }
+
+  .event.left .card-wrap { padding-right: 12px; }
+  .event.right .card-wrap { padding-left: 12px; }
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 100%;
+    z-index: 3;
+  }
+
+  .node {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--paper-3);
+  }
+
+  .event.left .node {
+    background: var(--union);
+    box-shadow: 0 0 0 2px var(--union);
+  }
+
+  .event.right .node {
+    background: var(--confed);
+    box-shadow: 0 0 0 2px var(--confed);
+  }
+
+  .card {
+    position: relative;
+    background: linear-gradient(135deg, #fffdf8 0%, #f7edd8 100%);
+    border: 1px solid rgba(27,58,107,0.18);
+    box-shadow: 3px 4px 14px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.7);
+    padding: 15px 16px 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 5px 8px 22px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+
+  .event.left .card { border-right: 4px solid var(--union); }
+  .event.right .card { border-left: 4px solid var(--confed); }
+
+  .event.left .card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -14px;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 10px solid var(--union);
+  }
+
+  .event.right .card::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -14px;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid var(--confed);
+  }
+
+  .event-date {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .event.left .event-date { color: var(--union); }
+  .event.right .event-date { color: var(--confed); }
+
+  .event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .event-desc {
+    font-size: 11.3px;
+    line-height: 1.68;
+    color: #3d3020;
+  }
+
+  .event-significance {
+    margin-top: 8px;
+    padding-top: 7px;
+    border-top: 1px dashed rgba(27,58,107,0.24);
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--gray);
+    font-style: italic;
+    font-family: 'IM Fell English', serif;
+  }
+
+  .event-image {
+    margin-top: 11px;
+    border: 1px solid rgba(27,58,107,0.18);
+    background: #efe3c4;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+  }
+
+  .event-image img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    filter: sepia(0.22) contrast(1.02) saturate(0.92);
+  }
+
+  .event-image figcaption {
+    padding: 7px 10px 8px;
+    font-size: 9.5px;
+    line-height: 1.5;
+    color: var(--gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0));
+  }
+
+  .footer {
+    margin-top: 38px;
+    padding-top: 22px;
+    text-align: center;
+    border-top: 2px solid var(--union);
+  }
+
+  .quote {
+    max-width: 560px;
+    margin: 0 auto;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--union);
+  }
+
+  .quote-attr, .class-info {
+    margin-top: 9px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .stars {
+    margin-top: 12px;
+    color: var(--union);
+    font-size: 9px;
+    letter-spacing: 8px;
+    opacity: 0.55;
+  }
+
+  @media (max-width: 900px) {
+    .inner-border { padding: 26px 20px 34px; }
+    .event-image img { height: 160px; }
+  }
+
+  @media (max-width: 700px) {
+    body { padding: 18px 8px 40px; }
+    .outer-border { margin: 10px; }
+    .timeline::before {
+      left: 21px;
+      transform: none;
+    }
+    .event {
+      grid-template-columns: 42px 1fr;
+      margin: 10px 0 18px;
+    }
+    .event.left .center,
+    .event.right .center {
+      grid-column: 1;
+      align-self: start;
+      padding-top: 18px;
+    }
+    .event.left .card-wrap,
+    .event.right .card-wrap {
+      grid-column: 2;
+      padding: 0;
+    }
+    .event.left .card,
+    .event.right .card {
+      border-left: none;
+      border-right: none;
+      border-top: 4px solid var(--union);
+    }
+    .event.right .card { border-top-color: var(--confed); }
+    .event.left .card::after,
+    .event.right .card::after { display: none; }
+    .year-marker { justify-content: flex-start; padding-left: 0; }
+    .year-badge { font-size: 15px; }
+    .title { font-size: 34px; }
+    .subtitle { font-size: 18px; }
+    .dates { font-size: 12px; letter-spacing: 4px; }
+    .legend { gap: 14px; }
+    .event-image img { height: 150px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="outer-border">
+      <div class="corner tl">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2 L14 2 L14 5 L5 5 L5 14 L2 14 Z" fill="#1b3a6b"/>
+          <path d="M2 2 L8 2 L2 8 Z" fill="#c8960c"/>
+          <circle cx="14" cy="14" r="3" fill="none" stroke="#c8960c" stroke-width="1"/>
+          <path d="M14 11 L14 5 M11 14 L5 14" stroke="#1b3a6b" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <div class="corner tr">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2 L14 2 L14 5 L5 5 L5 14 L2 14 Z" fill="#1b3a6b"/>
+          <path d="M2 2 L8 2 L2 8 Z" fill="#c8960c"/>
+          <circle cx="14" cy="14" r="3" fill="none" stroke="#c8960c" stroke-width="1"/>
+          <path d="M14 11 L14 5 M11 14 L5 14" stroke="#1b3a6b" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <div class="corner bl">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2 L14 2 L14 5 L5 5 L5 14 L2 14 Z" fill="#1b3a6b"/>
+          <path d="M2 2 L8 2 L2 8 Z" fill="#c8960c"/>
+          <circle cx="14" cy="14" r="3" fill="none" stroke="#c8960c" stroke-width="1"/>
+          <path d="M14 11 L14 5 M11 14 L5 14" stroke="#1b3a6b" stroke-width="0.8"/>
+        </svg>
+      </div>
+      <div class="corner br">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2 L14 2 L14 5 L5 5 L5 14 L2 14 Z" fill="#1b3a6b"/>
+          <path d="M2 2 L8 2 L2 8 Z" fill="#c8960c"/>
+          <circle cx="14" cy="14" r="3" fill="none" stroke="#c8960c" stroke-width="1"/>
+          <path d="M14 11 L14 5 M11 14 L5 14" stroke="#1b3a6b" stroke-width="0.8"/>
+        </svg>
+      </div>
+
+      <div class="inner-border">
+        <header class="header">
+          <div class="eyebrow">A Historical Chronicle</div>
+          <div class="title">The <span>American</span><br>Civil War</div>
+          <div class="subtitle">Thirteen Pivotal Moments of a Nation Divided</div>
+          <div class="dates">April 1861 • April 1865</div>
+          <div class="rule">
+            <div class="rule-line"></div>
+            <div class="rule-mark">◆</div>
+            <div class="rule-line"></div>
+          </div>
+          <div class="byline">Prepared by <strong>Niral · Anay · Anvi</strong> | Class 10-1 · Team F · Extra Credit</div>
+        </header>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot union"></span>Union / Federal</div>
+          <div class="legend-item"><span class="legend-dot confed"></span>Confederate / Southern</div>
+        </div>
+
+        <section class="timeline">
+          <div class="year-marker"><div class="year-badge">1861</div></div>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">April 12, 1861</div>
+                <div class="event-title">The Fall of Fort Sumter</div>
+                <div class="event-desc">Confederate artillery under General P.G.T. Beauregard bombarded the Union-held Fort Sumter in Charleston Harbor, South Carolina, for 34 hours. The fort's commander, Major Robert Anderson, surrendered on April 14. No soldiers died in combat.</div>
+                <div class="event-significance">The first shots of the war. Lincoln's call for 75,000 volunteers to suppress the rebellion immediately followed.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+
+          <article class="event right">
+            <div class="center"><div class="node"></div></div>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">July 21, 1861</div>
+                <div class="event-title">First Battle of Bull Run</div>
+                <div class="event-desc">Near Manassas, Virginia, Union forces under General Irvin McDowell met Confederate troops commanded by Beauregard and Joseph Johnston. After initial Union advances, a Confederate counterattack, anchored by General Thomas Jackson's brigade, shattered federal lines. Civilians who had come to watch fled alongside the retreating soldiers.</div>
+                <figure class="event-image">
+                  <img src="https://i.postimg.cc/fV0rTDqx/bull-run.avif" alt="Illustration of the First Battle of Bull Run">
+                  <figcaption>First Battle of Bull Run</figcaption>
+                </figure>
+                <div class="event-significance">Shattered Northern illusions of a quick, easy war. Forced both sides to prepare for a prolonged, massive conflict.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">March 8-9, 1862</div>
+                <div class="event-title">Battle of Hampton Roads: Monitor vs. Virginia</div>
+                <div class="event-desc">The Confederate ironclad CSS Virginia devastated Union wooden warships on March 8, sinking two vessels. The next day, the Union's own ironclad USS Monitor arrived and the two ships battled to a draw in the first engagement between iron-hulled warships in history.</div>
+                <div class="event-significance">Made wooden warships obsolete overnight and launched a new era of naval warfare worldwide.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+
+          <div class="year-marker"><div class="year-badge">1862</div></div>
+
+          <article class="event right">
+            <div class="center"><div class="node"></div></div>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">April 6-7, 1862</div>
+                <div class="event-title">Battle of Shiloh</div>
+                <div class="event-desc">Confederate General Albert Sidney Johnston launched a surprise dawn assault on Ulysses S. Grant's army camped at Pittsburg Landing, Tennessee. Johnston was killed on the first day. Union reinforcements turned the tide, and Grant drove the Confederates back on April 7. More than 23,000 casualties fell in two days.</div>
+                <div class="event-significance">The staggering bloodshed ended any hope of a short war and demonstrated that the South could not be defeated by a single decisive blow.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">September 17, 1862</div>
+                <div class="event-title">Battle of Antietam</div>
+                <div class="event-desc">General Robert E. Lee's first invasion of the North was stopped by General George McClellan along Antietam Creek in Maryland. With about 22,720 total casualties, it remains the bloodiest single day in American military history. Lee withdrew to Virginia the following day.</div>
+                <figure class="event-image">
+                  <img src="https://i.postimg.cc/crvDXdWy/antietam.avif" alt="Depiction of the Battle of Antietam">
+                  <figcaption>Battle of Antietam</figcaption>
+                </figure>
+                <div class="event-significance">The Union's narrow victory gave Lincoln the opening he needed to issue the Emancipation Proclamation and helped keep Britain from recognizing the Confederacy.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+
+          <article class="event right">
+            <div class="center"><div class="node"></div></div>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">January 1, 1863</div>
+                <div class="event-title">The Emancipation Proclamation</div>
+                <div class="event-desc">President Abraham Lincoln issued an executive order declaring that all enslaved persons in Confederate-held states "shall be then, thenceforward, and forever free." While it did not immediately free everyone, it fundamentally changed the character of the war and authorized the enlistment of Black men into the Union Army.</div>
+                <div class="event-significance">Redefined the war as a moral crusade against slavery, galvanized Black Americans, and made it much harder for European powers to aid the Confederacy.</div>
+              </div>
+            </div>
+          </article>
+
+          <div class="year-marker"><div class="year-badge">1863</div></div>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">April 30 - May 6, 1863</div>
+                <div class="event-title">Battle of Chancellorsville</div>
+                <div class="event-desc">Despite being badly outnumbered by General Joseph Hooker's Army of the Potomac, Lee and Stonewall Jackson executed a daring flanking maneuver that routed Union forces near Fredericksburg, Virginia. Jackson was accidentally shot by his own men and died days later.</div>
+                <div class="event-significance">Lee's greatest tactical victory, but the loss of Stonewall Jackson was a major blow from which the Confederacy never fully recovered.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+
+          <article class="event right">
+            <div class="center"><div class="node"></div></div>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">July 1-3, 1863</div>
+                <div class="event-title">Battle of Gettysburg</div>
+                <div class="event-desc">Lee's second invasion of the North ended in catastrophe in southern Pennsylvania. Three days of brutal fighting against General George Meade's Army of the Potomac culminated in Pickett's Charge, a disastrous assault on July 3. The battle produced roughly 51,000 total casualties.</div>
+                <figure class="event-image">
+                  <img src="https://i.postimg.cc/K4DFxr38/gettysburg.jpg" alt="Battle of Gettysburg scene">
+                  <figcaption>Battle of Gettysburg</figcaption>
+                </figure>
+                <div class="event-significance">The war's turning point. Lee never again mounted a major offensive, and the Confederacy was permanently forced into a defensive posture.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">July 4, 1863</div>
+                <div class="event-title">Surrender of Vicksburg</div>
+                <div class="event-desc">After a 47-day siege by Ulysses S. Grant's forces, Confederate General John C. Pemberton surrendered the fortress city of Vicksburg, Mississippi, along with nearly 30,000 soldiers. The capture on Independence Day was met with enormous celebration in the North.</div>
+                <div class="event-significance">Gave the Union complete control of the Mississippi River, splitting the Confederacy in two and cutting off vital supply lines from Texas and Louisiana.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+
+          <div class="year-marker"><div class="year-badge">1864</div></div>
+
+          <article class="event right">
+            <div class="center"><div class="node"></div></div>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">May 4 - June 24, 1864</div>
+                <div class="event-title">Grant's Overland Campaign</div>
+                <div class="event-desc">Newly appointed General-in-Chief Ulysses S. Grant launched a relentless offensive against Lee's Army of Northern Virginia through the Wilderness, Spotsylvania Court House, and Cold Harbor. Unlike earlier Union commanders, Grant refused to retreat after each costly battle, pressing south toward Richmond.</div>
+                <div class="event-significance">Introduced the strategy of attritional war. The Union could absorb the losses. The Confederacy could not.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">November 15 - December 21, 1864</div>
+                <div class="event-title">Sherman's March to the Sea</div>
+                <div class="event-desc">After capturing Atlanta, General William T. Sherman led 60,000 Union soldiers on a 300-mile march from Atlanta to Savannah, Georgia. His army cut a broad path of destruction through the Confederate heartland, targeting railroads, supply depots, and infrastructure.</div>
+                <div class="event-significance">Devastated the Confederacy's economy, weakened civilian morale, and accelerated the war's end.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+
+          <div class="year-marker"><div class="year-badge">1865</div></div>
+
+          <article class="event right">
+            <div class="center"><div class="node"></div></div>
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">April 9, 1865</div>
+                <div class="event-title">Lee's Surrender at Appomattox</div>
+                <div class="event-desc">Surrounded and exhausted after the fall of Petersburg, General Robert E. Lee surrendered the Army of Northern Virginia to General Ulysses S. Grant at the McLean House in Appomattox Court House, Virginia. Grant offered generous terms that allowed many Confederate soldiers to return home with dignity.</div>
+                <figure class="event-image">
+                  <img src="https://i.postimg.cc/JD8g2vqz/General-Robert-E-Lee-surrenders-at-Appomattox-Court-House-1865.jpg" alt="General Robert E. Lee surrendering at Appomattox Court House">
+                  <figcaption>Lee Surrenders at Appomattox Court House</figcaption>
+                </figure>
+                <div class="event-significance">Effectively ended the Civil War and helped begin the long process of national reconciliation.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="event left">
+            <div class="card-wrap">
+              <div class="card">
+                <div class="event-date">April 14-15, 1865</div>
+                <div class="event-title">Assassination of President Lincoln</div>
+                <div class="event-desc">Just days after Lee's surrender, Confederate sympathizer John Wilkes Booth shot President Abraham Lincoln at Ford's Theatre in Washington, D.C. during a performance of <em>Our American Cousin</em>. Lincoln died the following morning. He was the first U.S. president to be assassinated.</div>
+                <div class="event-significance">Removed the one leader most capable of guiding a careful Reconstruction and changed the course of postwar America.</div>
+              </div>
+            </div>
+            <div class="center"><div class="node"></div></div>
+          </article>
+        </section>
+
+        <footer class="footer">
+          <div class="rule">
+            <div class="rule-line"></div>
+            <div class="rule-mark">◆</div>
+            <div class="rule-line"></div>
+          </div>
+          <div class="quote">"A house divided against itself cannot stand. I believe this government cannot endure, permanently, half slave and half free."</div>
+          <div class="quote-attr">Abraham Lincoln · House Divided Speech, 1858</div>
+          <div class="class-info">Class 10-1 · Team F · Extra Credit Assignment</div>
+          <div class="stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
